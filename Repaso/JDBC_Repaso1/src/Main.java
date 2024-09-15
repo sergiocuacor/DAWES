@@ -8,26 +8,13 @@ import java.util.List;
 
 import com.sergio.classicmodels.dtos.ClienteDTO;
 import com.sergio.classicmodels.utils.DBUtils;
+import com.sergio.classicmodels.view.ClientesView;
 
 public class Main {
-public static void main(String[] args) throws ClassNotFoundException, SQLException {
-	
-	Connection conexionBDD = DBUtils.conectarConBBDD();
-	
-	Statement statement =	conexionBDD.createStatement();
-	
-	ResultSet clientes = statement.executeQuery("SELECT * FROM customers");
-	
-	List<ClienteDTO> listaClientes = new ArrayList<>();
-	
-	while(clientes.next()) {
-	ClienteDTO cliente = new ClienteDTO(clientes.getString("customerName"), clientes.getString("phone"));
-	listaClientes.add(cliente);
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+
+		ClientesView cv = new ClientesView();
+		cv.menuRecuperarClienteFiltroNombreTelefonoPais();
+		
 	}
-	
-	for(ClienteDTO cliente : listaClientes) {
-		System.out.println(cliente.toString());
-	}
-	
-}
 }
