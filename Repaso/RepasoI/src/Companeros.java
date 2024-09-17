@@ -1,0 +1,13 @@
+
+public enum Companeros {
+	PABLOVICEN,
+	PABLOCAFESOLO,
+	JAVI,
+	CARLOS,
+	CRISTIAN,
+	FRAN,
+	ANA,
+	JAIME,
+	ADRIAN,
+	RODRIGO
+}
