@@ -6,18 +6,19 @@ import java.sql.SQLException;
 
 public class DBUtils {
 
-	public static Connection conectarConBBDD() throws ClassNotFoundException, SQLException {
+	private static Connection con;
 
-		Class.forName("com.mysql.cj.jdbc.Driver");
-		
-		String servidor = "jdbc:mysql://localhost:3306/colegioproyecto";
-		
-		String username = "root";
-		
-		String password = "PracticaRoot";
-		
-		Connection conexionBDD = DriverManager.getConnection(servidor, username, password);
-		return conexionBDD;
-	}
+    public static  Connection obtenerConexionBBDD() throws ClassNotFoundException, SQLException {
+        if(con == null || con.isClosed()) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            String url = "jdbc:mysql://localhost:3306/colegioproyecto";
+            String user = "root";
+            String pass = "PracticaRoot";
+            
+            con = DriverManager.getConnection(url, user, pass);
+        }
+        return con;
+    }
 	
 }
