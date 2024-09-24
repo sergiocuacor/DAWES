@@ -26,6 +26,7 @@ CREATE TABLE alumno_asignatura (
     alumno_id INT,
     asignatura_id INT,
     PRIMARY KEY (alumno_id, asignatura_id),
-    FOREIGN KEY (alumno_id) REFERENCES alumnos(id),
-    FOREIGN KEY (asignatura_id) REFERENCES asignaturas(id)
+    FOREIGN KEY (alumno_id) REFERENCES alumnos(id) ON DELETE CASCADE,
+    FOREIGN KEY (asignatura_id) REFERENCES asignaturas(id) ON DELETE CASCADE
+    
 );
