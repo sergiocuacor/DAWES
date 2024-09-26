@@ -56,5 +56,42 @@ public class AsignaturaView {
 		}
 		
 	}
+	
+	
+	public void invocarMenuActualizarAsignaturas() throws ClassNotFoundException, SQLException {
+		
+		System.out.println("** ACTUALIZAR ASIGNATURA **");
+		System.out.println("ID de la asignatura a actualizar:");
+		Integer id = Integer.parseInt(sc.nextLine());
+		System.out.println("Nombre:");
+		String nombre = sc.nextLine();
+		System.out.println("Descripción");
+		String descripcion = sc.nextLine();
+		System.out.println("Numero horas:");
+		String numeroHoras = sc.nextLine();
+		System.out.println("Nombre profesor:");
+		String nombreProfesor = sc.nextLine();
+		
+		Integer resultado = new AsignaturaController().actualizarAsignatura(nombre, descripcion, Integer.parseInt(nombreProfesor), nombreProfesor, id);
+		
+	}
+	
+	public void invocarMenuBorrarAsignaturas() throws ClassNotFoundException, SQLException {
+		
+		System.out.println("** BORRAR ASIGNATURA **");
+		
+		System.out.println("ID de la asignatura que desea borrar:");
+		Integer id = Integer.parseInt(sc.nextLine());
+		
+		Integer resultado = new AsignaturaController().borrarAsignatura(id);
+		
+		if(resultado == 1) {
+			System.out.println("Alumno eliminado con éxito.");
+		} else {
+			System.out.println("Ha ocurrido un error.");
+		}
+	}
+	
+	
 
 }

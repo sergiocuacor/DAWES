@@ -1,3 +1,4 @@
+
 package com.sergio.proyecto.view;
 
 import java.sql.SQLException;
@@ -47,7 +48,7 @@ public class AlumnoView {
 		System.out.println("SEXO ( M / F ): ");
 		String sexo = sc.nextLine();
 		System.out.println("Edad: ");
-		Integer edad = Integer.parseInt(sc.nextLine());
+		String edad = sc.nextLine();
 
 		List<Alumno> listaAlumnos = new AlumnoController().consultarAlumnos(nombre, apellido, dni, sexo, edad);
 
@@ -71,9 +72,9 @@ public class AlumnoView {
 		System.out.println("SEXO ( M / F ): ");
 		String sexo = sc.nextLine();
 		System.out.println("Edad: ");
-		Integer edad = Integer.parseInt(sc.nextLine());
+		String edad = sc.nextLine();
 
-		Integer resultado = new AlumnoController().actualizarAlumno(nombre, apellido, dni, sexo, edad);
+		Integer resultado = new AlumnoController().actualizarAlumno(nombre, apellido, dni, sexo, edad, id);
 
 		if (resultado == 1) {
 			System.out.println("Alumno actualizado con éxito");

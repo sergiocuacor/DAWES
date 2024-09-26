@@ -17,4 +17,12 @@ public class AsignaturaController {
 		return new AsignaturaModel().insertarAsignatura(nombre, descripcion, numeroHoras, nombreProfesor);
 	}
 	
+	public Integer actualizarAsignatura(String nombre, String descripcion, Integer numeroHoras, String nombreProfesor, Integer id) throws ClassNotFoundException, SQLException {
+		return new AsignaturaModel().actualizarAsignatura(nombre, descripcion, descripcion, nombreProfesor, numeroHoras);
+	}
+	
+	public Integer borrarAsignatura(Integer id) throws ClassNotFoundException, SQLException {
+		return new AsignaturaModel().borrarAsignatura(id);
+	}
+	
 }

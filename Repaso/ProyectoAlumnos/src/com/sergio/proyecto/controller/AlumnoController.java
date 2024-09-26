@@ -14,15 +14,15 @@ public class AlumnoController {
 		
 	}
 	
-	public List<Alumno> consultarAlumnos(String nombre, String apellido, String dni, String sexo, Integer edad) throws ClassNotFoundException, SQLException{
+	public List<Alumno> consultarAlumnos(String nombre, String apellido, String dni, String sexo, String edad) throws ClassNotFoundException, SQLException{
 		
 		
 		return new AlumnoModel().consultarAlumnos(nombre, apellido, dni, sexo, edad);
 	}
 	
-	public Integer actualizarAlumno(String nombre, String apellido, String dni, String sexo, Integer edad) throws ClassNotFoundException, SQLException {
+	public Integer actualizarAlumno(String nombre, String apellido, String dni, String sexo, String edad, Integer id) throws ClassNotFoundException, SQLException {
 	
-		return new AlumnoModel().actualizarAlumno(nombre, apellido, dni, sexo, edad, edad);
+		return new AlumnoModel().actualizarAlumno(nombre, apellido, dni, sexo, edad, id);
 	}
 	
 	public Integer borrarAlumno(Integer id) throws ClassNotFoundException, SQLException {

@@ -13,7 +13,7 @@ import com.sergio.proyecto.utils.DBUtils;
 
 public class AlumnoModel {
 
-	public List<Alumno> consultarAlumnos(String nombre, String apellido, String dni, String sexo, Integer edad)
+	public List<Alumno> consultarAlumnos(String nombre, String apellido, String dni, String sexo, String edad)
 			throws ClassNotFoundException, SQLException {
 
 		List<Alumno> listaAlumnos = new ArrayList<Alumno>();
@@ -25,10 +25,10 @@ public class AlumnoModel {
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setString(1, "%" + nombre + "%");
-		ps.setString(2, apellido);
-		ps.setString(3, dni);
-		ps.setString(4, sexo);
-		ps.setInt(5, edad);
+		ps.setString(2, "%"+ apellido+"%");
+		ps.setString(3, "%"+ dni+"%");
+		ps.setString(4, "%" + sexo+ "%");
+		ps.setString(5, "%"+ edad+ "%");
 
 		ResultSet rs = ps.executeQuery();
 
@@ -62,14 +62,14 @@ public class AlumnoModel {
 		return resultado;
 	}
 
-	public Integer actualizarAlumno(String nombre, String apellido, String dni, String sexo, Integer edad, Integer id)
+	public Integer actualizarAlumno(String nombre, String apellido, String dni, String sexo, String edad, Integer id)
 			throws ClassNotFoundException, SQLException {
 
 		Connection con = DBUtils.obtenerConexionBBDD();
 
 		String sql = "UPDATE alumnos SET nombre = CASE WHEN ? = '' THEN nombre ELSE ? END, "
 				+ "apellido = CASE WHEN ? = '' THEN apellido ELSE ? END, "
-				+ "dni = CASE WHEN ? = '' THEN apellido ELSE ? END, " + "sexo = CASE WHEN ? = '' THEN sexo ELSE ? END,"
+				+ "dni = CASE WHEN ? = '' THEN dni ELSE ? END, " + "sexo = CASE WHEN ? = '' THEN sexo ELSE ? END,"
 				+ "edad = CASE WHEN ? = '' THEN edad ELSE ? END " + " WHERE id LIKE ? ";
 
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -82,8 +82,8 @@ public class AlumnoModel {
 		ps.setString(6, dni);
 		ps.setString(7, sexo);
 		ps.setString(8, sexo);
-		ps.setInt(9, edad);
-		ps.setInt(10, edad);
+		ps.setString(9, edad);
+		ps.setString(10, edad);
 		
 		ps.setInt(11, id);
 		

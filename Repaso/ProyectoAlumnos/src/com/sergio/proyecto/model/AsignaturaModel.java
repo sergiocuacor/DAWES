@@ -34,7 +34,7 @@ public class AsignaturaModel {
 			listaAsignaturas.add(new Asignatura(rs.getString("nombre"), rs.getString("descripcion"),
 					rs.getInt("numero_horas"), rs.getString("nombre_profesor")));
 		}
-		
+
 		con.close();
 		return listaAsignaturas;
 	}
@@ -60,5 +60,52 @@ public class AsignaturaModel {
 
 		return resultado;
 	}
+
+	public Integer actualizarAsignatura(String nombre, String descripcion, String numeroHoras, String nombreProfesor,
+			Integer id) throws ClassNotFoundException, SQLException {
+
+		Connection con = DBUtils.obtenerConexionBBDD();
+
+		String sql = "UPDATE asignaturas SET nombre = WHEN ? = '' THEN nombre ELSE ? END, "
+				+ "descripcion = WHEN ? = '' THEN descripcion else ? END, "
+				+ "numero_horas = WHEN ? = '' THEN numero_horas ELSE ? END, "
+				+ "nombre_profesor = WHEN = ? '' THEN nombre_profesor ELSE ? END " + " WHERE id LIKE ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setString(1, "%" + nombre + "%");
+		ps.setString(2, "%" + nombre + "%");
+		ps.setString(3, "%" + descripcion + "%");
+		ps.setString(4, "%" + descripcion + "%");
+		ps.setString(5, "%" + numeroHoras + "%");
+		ps.setString(6, "%" + numeroHoras + "%");
+		ps.setString(7, "%" + nombreProfesor + "%");
+		ps.setString(8, "%" + nombreProfesor + "%");
+		
+		ps.setInt(9, id);
+
+		Integer resultado = ps.executeUpdate();
+		con.close();
+
+		return resultado;
+		
+	}
+	
+	public Integer borrarAsignatura(Integer id) throws ClassNotFoundException, SQLException {
+		
+		Connection con = DBUtils.obtenerConexionBBDD();
+		
+		String sql = "DELETE FROM asignaturas WHERE id LIKE ? ";
+		
+		PreparedStatement ps = con.prepareStatement(sql);
+		
+		ps.setInt(1, id);
+		
+		Integer resultado = ps.executeUpdate();
+		
+		con.close();
+		return resultado;
+	}
+	
 
 }

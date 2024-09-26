@@ -36,29 +36,42 @@ public class MenuPrincipal {
 	}
 
 	public void invocarMenuAlumnos() throws ClassNotFoundException, SQLException {
+		int opcion;
+		do {
 		System.out.println("\n*** CRUD Alumnos ***");
 		System.out.println("1. Consultar Alumnos");
 		System.out.println("2. Insertar un nuevo alumno");
 		System.out.println("3. Actualizar alumno");
 		System.out.println("4. Eliminar alumno");
+		System.out.println("5. Salir");
 
 		AlumnoView alumnoView = new AlumnoView();
-
-		int opcion = Integer.parseInt(sc.nextLine());
-		switch (opcion) {
-		case 1:
-			alumnoView.invocarMenuConsultarAlumnos();
-			break;
-		case 2:
-			alumnoView.invocarMenuInsertarAlumno();
-			break;
-		case 3:
-			alumnoView.invocarMenuActualizarAlumno();
-			break;
-		case 4:
-			alumnoView.invocarMenuBorrarAlumno();
-			break;
-		}
+		
+		
+		
+		
+			opcion = Integer.parseInt(sc.nextLine());
+			switch (opcion) {
+			case 1:
+				alumnoView.invocarMenuConsultarAlumnos();
+				break;
+			case 2:
+				alumnoView.invocarMenuInsertarAlumno();
+				break;
+			case 3:
+				alumnoView.invocarMenuActualizarAlumno();
+				break;
+			case 4:
+				alumnoView.invocarMenuBorrarAlumno();
+				break;
+			case 5:
+				System.out.println("Saliendo del programa..");
+				return;
+			default:
+				System.out.println("");
+				break;
+			}
+		} while(opcion != 5);
 	}
 
 	public void invocarMenuAsignaturas() throws ClassNotFoundException, SQLException {
@@ -67,6 +80,7 @@ public class MenuPrincipal {
 		System.out.println("2. Insertar una nueva asignatura");
 		System.out.println("3. Actualizar asignatura");
 		System.out.println("4. Eliminar asignatura");
+		System.out.println("5. Salir");
 
 		AsignaturaView asignaturaView = new AsignaturaView();
 
@@ -83,7 +97,7 @@ public class MenuPrincipal {
 			
 			break;
 		case 4:
-
+			asignaturaView.invocarMenuBorrarAsignaturas();
 			break;
 		}
 	}
