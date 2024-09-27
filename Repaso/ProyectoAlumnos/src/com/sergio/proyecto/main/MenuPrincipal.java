@@ -94,7 +94,7 @@ public class MenuPrincipal {
 			asignaturaView.invocarMenuInsertarAsignatura();
 			break;
 		case 3:
-			
+			asignaturaView.invocarMenuActualizarAsignaturas();
 			break;
 		case 4:
 			asignaturaView.invocarMenuBorrarAsignaturas();
