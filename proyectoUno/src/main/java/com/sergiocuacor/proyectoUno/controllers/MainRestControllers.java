@@ -11,20 +11,9 @@ import com.sergiocuacor.proyectoUno.entities.Student;
 @RestController
 public class MainRestControllers {
 
-	
 	@GetMapping("/hello")
 	public String helloWorld() {
 		return "Hello world";
 	}
-
-	
-
-	
-	
-
-	
-	
-	
-	
 
 }

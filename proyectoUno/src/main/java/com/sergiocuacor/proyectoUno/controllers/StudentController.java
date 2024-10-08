@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.sergiocuacor.proyectoUno.entities.Student;
 
 @RestController
-@RequestMapping("/alumnos")
+@RequestMapping("/students")
 public class StudentController {
 
 	
@@ -20,22 +20,25 @@ public class StudentController {
 	public StudentController() {
 		super();
 		this.studentList = new ArrayList<Student>();
-		studentList.add(new Student("Carlitos", "85694896M", 12));
-		
+		studentList.add(new Student("kARLine", "8549853J", 65));
 	}
 
 	@GetMapping("/list")
 	public List<Student> getListaAlumnos() {
-
 		return studentList;
 	}
 	
 	@PostMapping("/add")
 	public List<Student> add(){
-		studentList.add(new Student(null, null, null));
+		studentList.add(new Student("Joe Rogan", "83349859M", 58));
 		return studentList;
 	}
 
-	
+	public List<Student> remove(){
+		
+		
+		
+		return studentList;
+	}
 	
 }
