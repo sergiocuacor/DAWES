@@ -1,0 +1,19 @@
+meta {
+  name: add Manually
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/students/addManually
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "mandingo",
+    "dni": "58495839M",
+    "age": 34
+  }
+}
