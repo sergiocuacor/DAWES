@@ -50,6 +50,16 @@ public class StudentController {
 		studentList.add(student);
 		return ResponseEntity.ok(student);
 	}
+	@PostMapping("/addManually1")
+	public ResponseEntity<?> add2(@RequestBody Student student) {
+		for(Student s : studentList) {
+			if(student.getDni().equalsIgnoreCase(s.getDni())) {
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("ERROR: This student is already in the list.");
+			}
+		}
+		studentList.add(student);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Success: new student added to the list.");
+	}
 	
 	
 	/* SI AL AÑADIR UN STUDENT YA EXISTE (POR DNI POR EJEMPLO), DEVOLVEMOS UN ERROR*/
