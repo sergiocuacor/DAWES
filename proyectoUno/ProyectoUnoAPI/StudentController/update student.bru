@@ -1,0 +1,19 @@
+meta {
+  name: update student
+  type: http
+  seq: 5
+}
+
+put {
+  url: http://localhost:8080/students/update/58495839P
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "YASMINLAFAR",
+    "dni": "58495839P",
+    "age": 70
+  }
+}
