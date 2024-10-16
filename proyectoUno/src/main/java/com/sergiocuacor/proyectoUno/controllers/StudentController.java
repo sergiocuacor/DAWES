@@ -28,7 +28,7 @@ public class StudentController {
 	public StudentController() {
 		super();
 		this.studentList = new ArrayList<Student>();
-		studentList.add(new Student(1,"kARLine", "8549853J", 65));
+		studentList.add(new Student(1, "kARLine", "8549853J", 65));
 	}
 
 	@GetMapping("/list")
@@ -36,9 +36,20 @@ public class StudentController {
 		return studentList;
 	}
 
+	@GetMapping("/list/{id}")
+	public Student getAlumno(@PathVariable Integer id) {
+		for (Student s : studentList) {
+			if (s.getId().equals(id)) {
+				return s;
+			}
+
+		}
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+	}
+
 	@PostMapping("/add")
 	public List<Student> add() {
-		studentList.add(new Student(2,"Joe Rogan", "83349859M", 58));
+		studentList.add(new Student(2, "Joe Rogan", "83349859M", 58));
 		return studentList;
 	}
 
@@ -80,29 +91,28 @@ public class StudentController {
 
 	}
 
-	
 	@DeleteMapping("/remove/{id}")
 	public ResponseEntity<?> removeById(@PathVariable Integer id) {
-		
+
 		boolean removed = false;
-		
+
 		Iterator<Student> iterator = studentList.iterator();
-		
-		while(iterator.hasNext()) {
+
+		while (iterator.hasNext()) {
 			Student student = iterator.next();
-			if(student.getId().equals(id)) {
+			if (student.getId().equals(id)) {
 				iterator.remove();
 				removed = true;
 			}
-			
+
 		}
-		if(removed) {
+		if (removed) {
 			return ResponseEntity.status(HttpStatus.OK).body("Student removed");
 		} else {
 			return ResponseEntity.status(HttpStatus.NOT_MODIFIED).body("Error: no student was removed");
 		}
 	}
-	
+
 	@DeleteMapping("/remove2/{id}")
 	public List<Student> removeById2(@PathVariable Integer id) {
 		boolean removed = studentList.removeIf(student -> student.getId().equals(id));
@@ -113,5 +123,4 @@ public class StudentController {
 		}
 	}
 
-	
 }
