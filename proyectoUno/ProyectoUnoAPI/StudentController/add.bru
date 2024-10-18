@@ -1,11 +1,28 @@
 meta {
   name: add
   type: http
-  seq: 2
+  seq: 3
 }
 
 post {
   url: http://localhost:8080/students/add
   body: json
   auth: none
+}
+
+body:json {
+  [
+    {
+    "id":4,
+    "name": "BABAYUKA",
+    "dni": "58495835X",
+    "age": 34
+  },
+  {
+      "id": 45,
+      "name": "NELSON",
+      "dni": "58495835Y",
+      "age": 34
+    }
+  ]
 }

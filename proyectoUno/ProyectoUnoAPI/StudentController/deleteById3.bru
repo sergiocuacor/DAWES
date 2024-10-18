@@ -1,0 +1,20 @@
+meta {
+  name: deleteById3
+  type: http
+  seq: 6
+}
+
+delete {
+  url: http://localhost:8080/students/delete3
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "id": 1,
+      "name": "kARLine",
+      "dni": "8549853J",
+      "age": 65
+    }
+}

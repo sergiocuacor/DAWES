@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.sergiocuacor.proyectoUno.entities.Student;
 
@@ -37,35 +38,18 @@ public class StudentController {
 	}
 
 	@GetMapping("/list/{id}")
-	public Student getAlumno(@PathVariable Integer id) {
+	public ResponseEntity<?> getStudent(@PathVariable Integer id) {
 		for (Student s : studentList) {
 			if (s.getId().equals(id)) {
-				return s;
+				return ResponseEntity.ok(s);
 			}
-
 		}
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El alumno con ID "+id+" no existe");
 	}
 
 	@PostMapping("/add")
-	public List<Student> add() {
-		studentList.add(new Student(2, "Joe Rogan", "83349859M", 58));
-		return studentList;
-	}
-
-	@PostMapping("/addManually")
-	public ResponseEntity<?> add1(@RequestBody Student student) {
-		for (Student s : studentList) {
-			if (student.getDni().equalsIgnoreCase(s.getDni())) {
-				return ResponseEntity.status(HttpStatus.CONFLICT).body("ERROR: This student is already in the list.");
-			}
-		}
-		studentList.add(student);
-		return ResponseEntity.ok(student);
-	}
-
-	@PostMapping("/addManually1")
 	public ResponseEntity<?> add2(@RequestBody Student student) {
+
 		for (Student s : studentList) {
 			if (student.getDni().equalsIgnoreCase(s.getDni())) {
 				return ResponseEntity.status(HttpStatus.CONFLICT).body("ERROR: This student is already in the list.");
@@ -90,9 +74,35 @@ public class StudentController {
 		return studentList;
 
 	}
+	
+	public ResponseEntity<?> update(@RequestBody Student studentUpdate){
+		Student studentAux = null;
+		
+		try {
+			
+			for(Student student : studentList) {
+				if(studentUpdate.getDni().equals(student.getName())) {
+					studentAux = student;
+				}
+			}
+		
+			if(studentAux != null) {
+				studentAux.setName(studentUpdate.getName());
+				studentAux.setAge(studentUpdate.getAge());
+				
+				return ResponseEntity.ok(studentAux);
+			}else {
+				return ResponseEntity.badRequest().body("User not found");
+			}
+		} catch(Exception ex) {
+			return ResponseEntity.internalServerError().body("An error occured while trying to update");
+		}
+		
+	}
+	
 
-	@DeleteMapping("/remove/{id}")
-	public ResponseEntity<?> removeById(@PathVariable Integer id) {
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<?> deleteById(@PathVariable Integer id) {
 
 		boolean removed = false;
 
@@ -113,8 +123,9 @@ public class StudentController {
 		}
 	}
 
-	@DeleteMapping("/remove2/{id}")
-	public List<Student> removeById2(@PathVariable Integer id) {
+	@DeleteMapping("/delete2/{id}") // Alternativa al delete
+	public List<Student> deleteById2(@PathVariable Integer id) {
+
 		boolean removed = studentList.removeIf(student -> student.getId().equals(id));
 		if (removed) {
 			return studentList;
@@ -123,4 +134,27 @@ public class StudentController {
 		}
 	}
 
+	@DeleteMapping("/delete3")
+	public ResponseEntity<?> deleteById3(@RequestBody Student studentDelete) {
+		Student studentAux = null;
+
+		try {
+			for (Student student : studentList) {
+				if (studentDelete.getDni().equals(student.getDni())) {
+					studentAux = student;
+				}
+			}
+			
+			if (studentAux != null) {
+				studentList.remove(studentAux);
+				return ResponseEntity.ok(studentList);
+			} else {
+				return ResponseEntity.badRequest().body("Student not found");
+			}
+			
+		} catch (Exception ex) {
+			return ResponseEntity.internalServerError().body("ERROR processing the elimination process.");
+		}
+
+	}
 }
